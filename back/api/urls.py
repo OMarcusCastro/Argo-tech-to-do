@@ -20,17 +20,19 @@ from rest_framework import routers
 
 from members.views import UserRegistrationAPIView, UserLoginAPIView, UserViewAPI, UserLogoutViewAPI
 
-from todo import views
-# from members
+from todo.views import create, list_all, delete, TodoItemViewSet, TodoItemUpdateSerializer, update
 
 router = routers.DefaultRouter()
 
-router.register(r'todo', views.TodoItemViewSet, basename='todo')
+router.register(r'todo', TodoItemViewSet, basename='todo')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('create/', views.create, name='create'),
+    path('create/', create, name='create'),
+    path("list/", list_all, name='list'),
+    path("delete/", delete, name="delete"),
+    path("update/", update, name="update"),
 
     # members
     path('user/register/', UserRegistrationAPIView.as_view()),
