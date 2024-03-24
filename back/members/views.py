@@ -33,7 +33,7 @@ class UserRegistrationAPIView(APIView):
                     "access_token": acess_token,
                 }
                 response = Response(data, status=status.HTTP_201_CREATED)
-                response.set_cookie(key='access token',
+                response.set_cookie(key='access_token',
                                     value=acess_token, httponly=True)
                 return response
 
@@ -68,6 +68,7 @@ class UserLoginAPIView(APIView):
                 value=user_access_token,
                 httponly=True
             )
+            print("logado")
             return response
         return Response({
             "mesage": "Something went wrong"
@@ -76,7 +77,7 @@ class UserLoginAPIView(APIView):
 
 class UserViewAPI(APIView):
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
     def get(self, request):
         user_token = request.COOKIES.get('access_token')
@@ -86,9 +87,9 @@ class UserViewAPI(APIView):
 
         payload = jwt.decode(
             user_token, settings.SECRET_KEY, algorithms=['HS256'])
-
+        print("payload: ", payload["user_id"])
         user_model = get_user_model()
-        user = user_model.objects.filter(id=payload['user_id']).first()
+        user = user_model.objects.filter(user_id=payload['user_id']).first()
         user_serializer = UserRegistrationSerializer(user)
         return Response(user_serializer.data)
 

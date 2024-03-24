@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-gm^t=5)o4thumpk4rm4&78z+elac!0(444g04r&_*w-1l+(-d4
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+# custom user model
+AUTH_USER_MODEL = 'members.User'
 
 # Application definition
 
@@ -42,17 +43,21 @@ INSTALLED_APPS = [
     'rest_framework',
     'todo',
     'members',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'api.urls'
 
@@ -126,3 +131,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        # Adicione outras classes de autenticação, se necessário
+    ],
+    # Outras configurações REST Framework aqui...
+}
