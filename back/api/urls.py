@@ -16,8 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from todo import views
 from rest_framework import routers
+
+from members.views import UserRegistrationAPIView, UserLoginAPIView, UserViewAPI, UserLogoutViewAPI
+
+from todo import views
+# from members
 
 router = routers.DefaultRouter()
 
@@ -27,5 +31,13 @@ router.register(r'todo', views.TodoItemViewSet, basename='todo')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('create/', views.create, name='create'),
+
+    # members
+    path('user/register/', UserRegistrationAPIView.as_view()),
+    path('user/login/', UserLoginAPIView.as_view()),
+    path('user/', UserViewAPI.as_view()),
+    path('user/logout/', UserLogoutViewAPI.as_view()),
+
+
     path('', include(router.urls))
 ]
