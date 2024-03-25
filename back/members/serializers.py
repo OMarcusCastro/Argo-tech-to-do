@@ -12,7 +12,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()  # Obtém o modelo de usuário padrão do Django
         # Campos a serem incluídos na serialização
-        fields = ['email', 'password', 'username']
+        fields = ["user_id", 'email', 'password', 'username']
 
     def create(self, validated_data):
         user_password = validated_data.get('password', None)
