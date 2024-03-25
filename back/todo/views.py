@@ -3,7 +3,11 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import viewsets
+
 from django.conf import settings
+
+from drf_yasg.utils import swagger_auto_schema
+
 import jwt
 
 from todo.models import TodoItem
@@ -27,6 +31,7 @@ class TodoItemViewSet(viewsets.ModelViewSet):
     serializer_class = TodoItemSerializer
 
 
+@swagger_auto_schema(method='post', request_body=TodoItemPostSerializer)
 @api_view(['POST'])
 def create(request):
     user_request = check_auth(request)
@@ -64,6 +69,7 @@ def create(request):
     return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@swagger_auto_schema(method='get')
 @api_view(['GET'])
 def list_all(request):
     user_request = check_auth(request)
@@ -78,6 +84,7 @@ def list_all(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@swagger_auto_schema(method='post', request_body=TodoItemDeleteSerializer)
 @api_view(['POST'])
 def delete(request):
     user_request = check_auth(request)
@@ -98,6 +105,7 @@ def delete(request):
     return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@swagger_auto_schema(method='put', request_body=TodoItemUpdateSerializer)
 @api_view(['PUT'])
 def update(request):
     user_request = check_auth(request)

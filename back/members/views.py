@@ -10,6 +10,10 @@ from django.contrib.auth import authenticate
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from .utils import generate_access_token
+
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
 import jwt
 # Create your views here.
 
@@ -19,10 +23,7 @@ class UserRegistrationAPIView(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (AllowAny,)
 
-    def get(self, request):
-        content = {"message": "Hello, World!"}
-        return Response(content)
-
+    @swagger_auto_schema(request_body=UserRegistrationSerializer)
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -45,6 +46,7 @@ class UserLoginAPIView(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (AllowAny,)
 
+    @swagger_auto_schema(request_body=UserLoginSerializer)
     def post(self, request):
         email = request.data.get('email', None)
         user_password = request.data.get('password', None)
@@ -79,6 +81,7 @@ class UserViewAPI(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (AllowAny,)
 
+    @swagger_auto_schema(responses={200: UserRegistrationSerializer})
     def get(self, request):
         user_token = request.COOKIES.get('access_token')
 
@@ -98,6 +101,7 @@ class UserLogoutViewAPI(APIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (AllowAny,)
 
+    @swagger_auto_schema(responses={200: openapi.Response("Successfully logged out")})
     def get(self, request):
         user_token = request.COOKIES.get('access_token')
         response = Response()

@@ -20,11 +20,23 @@ from rest_framework import routers
 
 from members.views import UserRegistrationAPIView, UserLoginAPIView, UserViewAPI, UserLogoutViewAPI
 
-from todo.views import create, list_all, delete, TodoItemViewSet, TodoItemUpdateSerializer, update
+from todo.views import create, list_all, delete, TodoItemViewSet, update
+
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view as swagger_get_swagger_view
+
+schema_view = swagger_get_swagger_view(
+    openapi.Info(
+        title="To-do API",
+        default_version='v1',
+        description="Documentation for the To-do API",
+    ),
+    public=True
+)
 
 router = routers.DefaultRouter()
 
-router.register(r'todo', TodoItemViewSet, basename='todo')
+# router.register(r'todo', TodoItemViewSet, basename='todo')
 
 
 urlpatterns = [
@@ -41,5 +53,7 @@ urlpatterns = [
     path('user/logout/', UserLogoutViewAPI.as_view()),
 
 
-    path('', include(router.urls))
+    path('', include(router.urls)),
+
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0))
 ]
