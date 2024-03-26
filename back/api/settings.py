@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-gm^t=5)o4thumpk4rm4&78z+elac!0(444g04r&_*w-1l+(-d4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', "https://6602b9d8d9190b0008565faf--lovely-yeot-283d0c.netlify.app",
+                 "https://6602b9d8d9190b0008565faf--lovely-yeot-283d0c.netlify.app/"]
 # custom user model
 AUTH_USER_MODEL = 'members.User'
 
@@ -83,13 +84,16 @@ WSGI_APPLICATION = 'api.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+# postgres://imagens_test_user:f3dH9AOTlXfkM89Y5IgsI7FMFKz8UecM@dpg-cn204qol6cac73ff2f2g-a.oregon-postgres.render.com/imagens_test
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'dba.sqlite3',
     }
 }
+
+DATABASES['default'] = dj_database_url.parse(
+    "postgres://angular_teste_user:khQKp47O9YV4PWmB8HmQFqXTWf7JqwaH@dpg-co1c3rv109ks73bj6l2g-a.oregon-postgres.render.com/angular_teste")
 
 
 # Password validation
