@@ -16,6 +16,7 @@
     <div class="buttons" *ngIf="showButtonsMap[task.id]">
       <button class="op-button">Edit</button>
       <button class="op-button" (click)="onDelete(task.id)">Delete</button>
+      <button class="op-button" (click)="makeSubtask(task)"> Sub </button>
     </div>
   </div>
 
@@ -42,3 +43,5 @@
     </li>
   </ul>
 </li>
+
+
