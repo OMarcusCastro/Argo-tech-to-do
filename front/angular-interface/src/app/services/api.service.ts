@@ -89,6 +89,30 @@ export class ApiService {
     return response
   }
 
+  updateTask(task:any){
+    this.token=localStorage.getItem("token")||"token undefined"
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`,
+    });
+
+    return this.http.put<any>(`${this.endpointUrl}/update/`, task, { headers })
+
+  }
+
+  deleteTask(id:number){
+    this.token=localStorage.getItem("token")||"token undefined"
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`,
+    });
+    const data = {id}
+
+
+    return this.http.post<any>(`${this.endpointUrl}/delete/`, data,{ headers })
+
+  }
+
 
 
 

@@ -4,11 +4,13 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { cp } from 'node:fs';
 import { SharedModuleComponent } from '../shared-module/shared-module.component';
+import { app } from '../../../../server';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule, SharedModuleComponent],
+  imports: [CommonModule, SharedModuleComponent,TaskComponent],
   providers : [ApiService],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'

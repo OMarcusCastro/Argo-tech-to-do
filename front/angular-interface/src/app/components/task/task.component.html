@@ -1,0 +1,44 @@
+<li
+  class="task"
+  (mouseenter)="toggleButtons(task.id, true)"
+  (mouseleave)="toggleButtons(task.id, false)"
+>
+  <div class="initial">
+    <div class="task-group">
+      <input
+        type="checkbox"
+        [id]="'task_' + task.id"
+        [checked]="task.status === 'completed'"
+        (change)="checkboxChanged(task.id, task)"
+      />
+      <label [for]="'task_' + task.id">{{ task.title }}</label>
+    </div>
+    <div class="buttons" *ngIf="showButtonsMap[task.id]">
+      <button class="op-button">Edit</button>
+      <button class="op-button" (click)="onDelete(task.id)">Delete</button>
+    </div>
+  </div>
+
+  <ul *ngIf="task.subtasks && task.subtasks.length > 0" class="sub-tasks">
+    <li
+      class="sub-task"
+      *ngFor="let subtask of task.subtasks"
+      (mouseenter)="toggleButtons(subtask.id, true)"
+      (mouseleave)="toggleButtons(subtask.id, false)"
+    >
+      <div class="task-group">
+        <input
+          type="checkbox"
+          [id]="'subtask_' + subtask.id"
+          [checked]="subtask.status === 'completed'"
+          (change)="checkboxChanged(subtask.id, subtask)"
+        />
+        <label [for]="'subtask_' + subtask.id">{{ subtask.title }}</label>
+      </div>
+      <div class="buttons" *ngIf="showButtonsMap[subtask.id]">
+        <button class="op-button">Edit</button>
+        <button class="op-button" (click)="onDelete(subtask.id)">Delete</button>
+      </div>
+    </li>
+  </ul>
+</li>
