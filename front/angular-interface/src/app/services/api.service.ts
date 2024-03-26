@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root',
 })
 export class ApiService {
-  private endpointUrl = 'http://127.0.0.1:8000';
+  private endpointUrl = 'https://argo-tech-to-do-2.onrender.com';
   user_id = signal(0)
   token:string = ""
   task_list = signal("")
