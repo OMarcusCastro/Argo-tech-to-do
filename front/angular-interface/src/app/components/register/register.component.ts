@@ -53,10 +53,12 @@ export class RegisterComponent {
         this.registerFrom.value.password,
         this.registerFrom.value.username
       ).subscribe({
-        next:(data)=>{
+        next:(data:any)=>{
           this.apiService.setToken(data.access_token)
+
+          console.log("data:",data)
           localStorage.setItem('token',data.access_token)
-          console.log(data.access_token)
+          localStorage.setItem('user_id',data.user_id)
           this.registerFrom.reset()
           this.router.navigate(['/list'])
         },

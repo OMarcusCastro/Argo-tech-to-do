@@ -32,6 +32,7 @@ class UserRegistrationAPIView(APIView):
                 acess_token = generate_access_token(new_user)
                 data = {
                     "access_token": acess_token,
+                    "user_id": new_user.user_id,
                 }
                 response = Response(data, status=status.HTTP_201_CREATED)
                 response.set_cookie(key='access_token',
