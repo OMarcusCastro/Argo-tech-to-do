@@ -50,12 +50,17 @@ export class ListComponent {
       next: (response) => {
         console.log(response)
         localStorage.removeItem('token')
+        localStorage.removeItem('user_id')
         window.location.href = '/login'
       },
       error: (error) => {
         console.log(error)
       }
     })
+  }
+
+  onCreate(){
+    this.router.navigate(['/create'])
   }
 
 

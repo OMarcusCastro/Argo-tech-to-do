@@ -12,6 +12,7 @@
         (change)="checkboxChanged(task.id, task)"
       />
       <label [for]="'task_' + task.id">{{ task.title }}</label>
+      <span class="description" *ngIf="showButtonsMap[task.id]">info:{{ task.description }}</span>
     </div>
     <div class="buttons" *ngIf="showButtonsMap[task.id]">
       <button class="op-button">Edit</button>
@@ -35,6 +36,7 @@
           (change)="checkboxChanged(subtask.id, subtask)"
         />
         <label [for]="'subtask_' + subtask.id">{{ subtask.title }}</label>
+        <span class="description" *ngIf="showButtonsMap[subtask.id]">info: {{ subtask.description }}</span>
       </div>
       <div class="buttons" *ngIf="showButtonsMap[subtask.id]">
         <button class="op-button">Edit</button>

@@ -44,6 +44,7 @@ export class LoginComponent {
             this.apiService.getUserID(token).subscribe({
               next: (data)=>{
                 this.apiService.user_id.set(data.user_id)
+                localStorage.setItem("user_id",data.user_id)
                 console.log("data",data.user_id)
               }
             })

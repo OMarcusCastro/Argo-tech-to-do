@@ -124,5 +124,16 @@ export class ApiService {
 
   }
 
+  sendTask(data: any) {
+    this.token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`,
+    });
+
+    console.log('data', data);
+    return this.http.post<any>(`${this.endpointUrl}/create/`, data, { headers });
+  }
+
 
 }

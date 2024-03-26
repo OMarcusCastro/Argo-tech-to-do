@@ -13,6 +13,7 @@ import { ApiService } from '../../services/api.service';
 export class TaskComponent {
   @Input() task: any;
   @Input() anterior:number=0;
+  showDescriptionMap: { [key: number]: boolean } = {};
 
   constructor(private apiService: ApiService) {}
 
@@ -21,6 +22,8 @@ export class TaskComponent {
   toggleButtons(taskId: string, show: boolean) {
     this.showButtonsMap[taskId] = show;
   }
+
+
 
   checkboxChanged(id: number,task:any) {
     // Aqui você tem acesso ao ID e à tarefa ou sub-tarefa que teve o checkbox alterado

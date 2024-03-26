@@ -1,0 +1,71 @@
+.from-container{
+  margin: 20px auto;
+  background-color:  rgba(110, 20, 165, 0.17);
+  max-width: 1080px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: start;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 8px;
+
+  input,textarea{
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #b09db6;
+  }
+  textarea{
+    size-adjust: auto;
+
+  }
+
+  .form{
+    margin: 20px auto;
+
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: start;
+    align-items: flex-start;
+    padding: 1rem;
+    border-radius: 8px;
+    gap: 1rem;
+
+    *{
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .op-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ;
+
+    background-color: #af5de3;
+    color: white;
+    border: none;
+    padding: 0.5rem ; /* Ajuste o padding horizontal conforme necessário */
+    border-radius: 8px;
+    cursor: pointer;
+    height: 2rem;
+    text-align: center;
+    font-size: 1rem;
+
+  }
+
+
+
+}

@@ -1,0 +1,22 @@
+<h1>Create Task</h1>
+
+<div class="from-container">
+  <form class="form" [formGroup]="newTask">
+    <div class="form-group-title">
+      <label for="title">Task Name</label>
+      <input type="text" formControlName="title" class="form-control" id="title" placeholder="Enter task">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" formControlName="description" id="description" rows="3"></textarea>
+
+    </div>
+
+    <div class="buttons">
+      <button  class="op-button" (click)="voltar()" >Voltar</button>
+      <button type="submit" (click)="save()" class="op-button" >Submit</button>
+
+    </div>
+  </form>
+</div>
