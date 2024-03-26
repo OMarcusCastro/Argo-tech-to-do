@@ -32,7 +32,8 @@ export class ListComponent {
     const token:string = this.apiService.getToken()
     this.apiService.getTasks(token).subscribe(
       (tasks)=>this.tasks=tasks
-    )
+      )
+
   }
 
 

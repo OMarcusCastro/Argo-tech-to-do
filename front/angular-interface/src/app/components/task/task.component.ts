@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -12,6 +12,7 @@ import { ApiService } from '../../services/api.service';
 })
 export class TaskComponent {
   @Input() task: any;
+  @Input() anterior:number=0;
 
   constructor(private apiService: ApiService) {}
 
@@ -55,6 +56,27 @@ export class TaskComponent {
     })
   }
 
+ makeSubtask(task:any){
+    if(task.parent_task){
+      alert('Você não pode criar uma sub-tarefa para uma sub-tarefa')
+      return
+    }
+    if(!this.anterior){
+      alert("erro")
+      return
+    }
+    console.log(this.anterior)
+    task.parent_task= this.anterior
 
+    this.apiService.updateTask(task).subscribe({
+      next: (response) => {
+        console.log('Task updated', response);
+        window.location.reload()
+      },
+      error: (error) => {
+        console.error('Error updating task', error);
+      },
+    })
+
+ }
 }
-

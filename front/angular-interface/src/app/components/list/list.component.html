@@ -1,8 +1,6 @@
 <h1>My Tasks</h1>
 
-
-
-  <!-- <ul class="main-tasks">
+<!-- <ul class="main-tasks">
     <ng-container *ngFor="let task of tasks">
       <li class="task">
         <input type="checkbox" [id]="'task_' + task.id" [checked]="task.status === 'completed'" />
@@ -17,8 +15,13 @@
     </ng-container>
   </ul> -->
 
-
-
 <ul class="main-tasks">
-  <app-task class="task" *ngFor="let task of tasks" [task]="task"></app-task>
+  <app-task class="task" *ngFor="let task of tasks;let i = index"
+
+  [task]="task"
+  [anterior]="i > 0 ? tasks[i - 1].id : null"
+
+  ></app-task>
+
+
 </ul>
