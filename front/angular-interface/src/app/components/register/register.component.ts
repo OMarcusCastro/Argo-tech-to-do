@@ -41,6 +41,16 @@ export class RegisterComponent {
 
   register() {
     console.log('entrou')
+    if (this.registerFrom.value.password.length < 8) {
+      alert('Senha muito curta,min 8 caracteres')
+      console.log('senha curta')
+      return
+    }
+    if (this.registerFrom.value.email.length < 3) {
+      alert('Email muito curto, tem que ser maior que 3 caracteres')
+      console.log('email curto')
+      return
+    }
     if (this.registerFrom.valid) {
       if(this.registerFrom.value.password != this.registerFrom.value.confirmPassword){
 
