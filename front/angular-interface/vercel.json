@@ -1,5 +1,5 @@
 {
-  "roustes":[
+  "routes":[
     { "src": "/",
       "dest": "/"
   }
