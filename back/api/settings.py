@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-gm^t=5)o4thumpk4rm4&78z+elac!0(444g04r&_*w-1l+(-d4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '0.0.0.0', "https://6602b9d8d9190b0008565faf--lovely-yeot-283d0c.netlify.app",
-                 "https://6602b9d8d9190b0008565faf--lovely-yeot-283d0c.netlify.app/"]
+ALLOWED_HOSTS = ["*"]
 # custom user model
 AUTH_USER_MODEL = 'members.User'
 
