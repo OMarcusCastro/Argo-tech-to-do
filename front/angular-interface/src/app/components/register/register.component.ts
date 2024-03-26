@@ -7,11 +7,13 @@ import {
 } from '@angular/forms';
 import { validateHeaderName } from 'http';
 import { ApiService } from '../../services/api.service';
+import { Router,RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink,CommonModule],
   providers: [ApiService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
@@ -19,7 +21,7 @@ import { ApiService } from '../../services/api.service';
 export class RegisterComponent {
   registerFrom: FormGroup;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService,private router:Router) {
     this.registerFrom = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [
@@ -41,6 +43,7 @@ export class RegisterComponent {
     console.log('entrou')
     if (this.registerFrom.valid) {
       if(this.registerFrom.value.password != this.registerFrom.value.confirmPassword){
+
         alert('Senhas incompativeis')
         console.log("senha errada")
         return
@@ -50,10 +53,23 @@ export class RegisterComponent {
         this.registerFrom.value.password,
         this.registerFrom.value.username
       ).subscribe({
-        next:()=>{
+        next:(data)=>{
+          this.apiService.setToken(data.access_token)
+          localStorage.setItem('token',data.access_token)
+          console.log(data.access_token)
           this.registerFrom.reset()
+          this.router.navigate(['/list'])
+        },
+        error:(error)=>{
+          error=error.error
+          if(error.email){
+            alert(error.email)
+          }
+          console.log('erro ao fazer login',error.error)
         }
       })
+
+
 
 
     }

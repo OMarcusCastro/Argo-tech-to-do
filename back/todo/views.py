@@ -18,7 +18,15 @@ from todo.serializer import TodoItemDeleteSerializer, TodoItemUpdateSerializer
 
 
 def check_auth(request):
-    user_token = request.COOKIES.get('access_token')
+
+    user_token = request.headers.get('Authorization')
+
+    # if not user_token:
+    #     raise AuthenticationFailed('Unauthenticated')
+    user_token = user_token.split(
+        ' ')[1] if user_token.startswith('Bearer ') else ""
+    # user_token = request.COOKIES.get('access_token')
+    print("access", user_token)
     if not user_token:
         return False
     payload = jwt.decode(user_token, settings.SECRET_KEY, algorithms=['HS256'])
@@ -72,7 +80,9 @@ def create(request):
 @swagger_auto_schema(method='get')
 @api_view(['GET'])
 def list_all(request):
+
     user_request = check_auth(request)
+    print("entrei", user_request)
     if not user_request:
         return Response({'error': 'Unauthenticated'}, status=status.HTTP_401_UNAUTHORIZED)
 
@@ -81,6 +91,7 @@ def list_all(request):
         parent_task=None, user=user_request)
     # Serialize as tarefas principais com suas sub tarefas
     serializer = TodoListTarefasSerializer(tarefas_principais, many=True)
+
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 

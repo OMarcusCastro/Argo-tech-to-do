@@ -1,0 +1,19 @@
+<h1>My Tasks</h1>
+
+
+<div class="todo-list">
+  <ul class="tasks">
+    <ng-container *ngFor="let task of tasks">
+      <li class="task">
+        <input type="checkbox" [id]="'task_' + task.id" [checked]="task.status === 'completed'" />
+        <label [for]="'task_' + task.id">{{ task.title }}</label>
+        <ul *ngIf="task.subtasks && task.subtasks.length > 0" class="sub-tasks">
+          <li *ngFor="let subtask of task.subtasks" class="sub-task">
+            <input type="checkbox" [id]="'subtask_' + subtask.id" [checked]="subtask.status === 'completed'" />
+            <label [for]="'subtask_' + subtask.id">{{ subtask.title }}</label>
+          </li>
+        </ul>
+      </li>
+    </ng-container>
+  </ul>
+</div>
