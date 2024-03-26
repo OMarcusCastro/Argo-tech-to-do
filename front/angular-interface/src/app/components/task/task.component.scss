@@ -52,15 +52,21 @@ ul{
   gap:0.5rem;
 
   .op-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    ;
+
     background-color: #af5de3;
     color: white;
     border: none;
-    padding: 0.5rem;
+    padding: 0.5rem ; /* Ajuste o padding horizontal conforme necessário */
     border-radius: 8px;
     cursor: pointer;
-    padding: auto;
     height: 2rem;
     text-align: center;
+    font-size: 0.7rem;
+
   }
 
 

@@ -113,7 +113,16 @@ export class ApiService {
 
   }
 
+  sendlogout(){
+    this.token=localStorage.getItem("token")||"token undefined"
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`,
+    });
 
+    return this.http.get<any>(`${this.endpointUrl}/user/logout/`, { headers })
+
+  }
 
 
 }
