@@ -1,3 +1,3 @@
 export interface LoginResponse{
-  acess_token:string
+  access_token:string
 }

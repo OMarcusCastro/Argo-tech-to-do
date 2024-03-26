@@ -64,14 +64,16 @@ class UserLoginAPIView(APIView):
 
         if user_instance.is_active:
             user_access_token = generate_access_token(user_instance)
-            response = Response()
+            response = Response({'access_token': user_access_token})
             response.set_cookie(
                 key='access_token',
                 value=user_access_token,
                 httponly=True
             )
             print("logado")
+            # print({'access_token': user_access_token})
             return response
+
         return Response({
             "mesage": "Something went wrong"
         })
@@ -83,10 +85,14 @@ class UserViewAPI(APIView):
 
     @swagger_auto_schema(responses={200: UserRegistrationSerializer})
     def get(self, request):
-        user_token = request.COOKIES.get('access_token')
+        # user_token = request.COOKIES.get('access_token')
+        user_token = request.headers.get('Authorization')
+        print("access", user_token)
 
         if not user_token:
             raise AuthenticationFailed('Unauthenticated')
+        user_token = user_token.split(
+            ' ')[1] if user_token.startswith('Bearer ') else user_token
 
         payload = jwt.decode(
             user_token, settings.SECRET_KEY, algorithms=['HS256'])

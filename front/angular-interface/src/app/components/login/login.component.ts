@@ -30,12 +30,24 @@ export class LoginComponent {
     console.log(this.loginForm.value)
 
     if (this.loginForm.valid){
-      this.apiService.sendLogin(this.loginForm.value.email,
+      const response=this.apiService.sendLogin(this.loginForm.value.email,
         this.loginForm.value.password).subscribe({
-          next:()=>{
-            this.loginForm.reset
+          next:(token:string)=>{
+            console.log(token)
+            this.apiService.getUserID(token).subscribe({
+              next: (user_id:number)=>{
+                console.log(user_id)
+              }
+            })
+            this.loginForm.reset()
+          },
+          error:(error)=>{
+            console.log('erro ao fazer login',error)
           }
         })
+
+
+      console.log(response)
     }
 
   }
