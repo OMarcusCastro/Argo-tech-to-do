@@ -15,7 +15,7 @@
       <span class="description" *ngIf="showButtonsMap[task.id]">info:{{ task.description }}</span>
     </div>
     <div class="buttons" *ngIf="showButtonsMap[task.id]">
-      <button class="op-button">Edit</button>
+      <button class="op-button" (click)="editor(task)">Edit</button>
       <button class="op-button" (click)="onDelete(task.id)">Delete</button>
       <button class="op-button" (click)="makeSubtask(task)"> make subtask </button>
     </div>
@@ -39,9 +39,14 @@
         <span class="description" *ngIf="showButtonsMap[subtask.id]">info: {{ subtask.description }}</span>
       </div>
       <div class="buttons" *ngIf="showButtonsMap[subtask.id]">
-        <button class="op-button">Edit</button>
+        <button class="op-button" (click)="editor(subtask)">Edit</button>
         <button class="op-button" (click)="onDelete(subtask.id)">Delete</button>
       </div>
     </li>
   </ul>
 </li>
+
+
+<div *ngIf="editing" class="task">
+  <app-updatetask [task]="editingTask" ></app-updatetask>
+</div>

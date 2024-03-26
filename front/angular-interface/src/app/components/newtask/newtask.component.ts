@@ -25,11 +25,11 @@ export class NewtaskComponent {
     this.newTask = new FormGroup({
       title: new FormControl('', [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(2),
       ]),
       description: new FormControl('', [
         Validators.required,
-        Validators.minLength(10),
+        Validators.minLength(5),
       ]),
     });
   }

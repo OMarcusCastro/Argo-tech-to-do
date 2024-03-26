@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { UpdatetaskComponent } from '../updatetask/updatetask.component';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,UpdatetaskComponent],
   providers:[ApiService],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
@@ -13,7 +14,11 @@ import { ApiService } from '../../services/api.service';
 export class TaskComponent {
   @Input() task: any;
   @Input() anterior:number=0;
+  editing:boolean=false;
+  editingTask:any;
+
   showDescriptionMap: { [key: number]: boolean } = {};
+
 
   constructor(private apiService: ApiService) {}
 
@@ -82,4 +87,14 @@ export class TaskComponent {
     })
 
  }
+
+ editor(task:any){
+    console.log('editando',task)
+    this.editing=true
+    this.editingTask=task
+
+
+ }
+
+
 }
